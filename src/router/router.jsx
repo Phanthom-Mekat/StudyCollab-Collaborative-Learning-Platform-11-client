@@ -6,6 +6,7 @@ import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import CreateAssignment from "../pages/CreateAssignment";
+import Assignments from "@/pages/Assignments";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
             {
                 path:'create',
                 element:<CreateAssignment/>
+            },
+            {
+                path:'assignments',
+                element: <Assignments/>,
+                loader: async () => fetch('http://localhost:5000/create').then(res => res.json())
             }
         ]
     },

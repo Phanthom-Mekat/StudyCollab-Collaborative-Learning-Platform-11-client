@@ -23,6 +23,7 @@ export default {
   },
   plugins: [
     daisyui,
+      // eslint-disable-next-line no-undef
       require("tailwindcss-animate")
 ],
 }
