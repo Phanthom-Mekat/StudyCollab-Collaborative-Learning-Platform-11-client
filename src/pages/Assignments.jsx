@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link,  useLoaderData, useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,15 +13,24 @@ const Assignments = () => {
   const { user } = useContext(AuthContext);
   const initialAssignments = useLoaderData();
   const [assignments, setAssignments] = useState(initialAssignments);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setAssignments(initialAssignments);
   }, [initialAssignments]);
 
+  const handleUpdate =(id,email)=>{
+    if(email !== user.email){
+      toast.error('Update your own assignment🤡');
+      return;
+    }
+    navigate(`/update/${id}`);
+  }
+
   const handleDelete = (id, email) => {
     if (email !== user.email) {
-      toast.error('You cant delete this assignment🤡');
+      toast.error('Delete your own assignment🤡');
       return;
     }
 
@@ -135,7 +144,15 @@ const Assignments = () => {
                   View
                 </Link>
               </Button>
-              <Button variant="outline" className="flex-1 mr-2">Update</Button>
+              <Button variant="outline"
+              onClick={() => handleUpdate(assignment._id,assignment.email)}
+              className="flex-1 mr-2"
+              
+              >
+                {/* <Link to={`/update/${assignment._id}`} className="block w-full text-center"> */}
+                  Update
+                {/* </Link> */}
+              </Button>
               <Button 
                 variant="destructive" 
                 className="flex-1"
