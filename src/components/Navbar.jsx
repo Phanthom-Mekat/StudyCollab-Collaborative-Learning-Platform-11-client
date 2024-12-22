@@ -1,12 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import { Key } from "lucide-react";
 import { SiStudyverse } from "react-icons/si";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-    const user = {
-        isLoggedIn: false, // Replace with actual authentication check
-        name: "John Doe",
-        photoURL: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.log(err));
     };
 
     const activeClassName = "font-bold text-primary";
@@ -20,12 +24,12 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink to="/assignments" className={({ isActive }) => (isActive ? activeClassName : undefined)}>
-                Assignments
+                    Assignments
                 </NavLink>
             </li>
             <li>
                 <NavLink to="/pendingassignments" className={({ isActive }) => (isActive ? activeClassName : undefined)}>
-                Pending Assignments
+                    Pending Assignments
                 </NavLink>
             </li>
         </>
@@ -58,7 +62,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to="/" className="btn btn-ghost text-xl flex items-center gap-2">
-                        <SiStudyverse size={24} className="text-primary bg-gradient-to-r from-primary/15 to-secondary rounded-md px-"/> StudyCollab
+                        <SiStudyverse size={24} className="text-primary bg-gradient-to-r from-primary/15 to-secondary rounded-md px-" /> StudyCollab
                     </Link>
                 </div>
 
@@ -71,27 +75,28 @@ const Navbar = () => {
 
                 {/* Navbar End */}
                 <div className="navbar-end">
-                    {!user.isLoggedIn ? (
+                    {!user ? (
                         <NavLink to="/auth/login" className="btn btn-sm rounded-3xl">
-                          <Key size={16} className="text-primary "/>  Login
+                            <Key size={16} className="text-primary " />  Login
                         </NavLink>
                     ) : (
                         <div className="dropdown dropdown-end">
-                            <div
+                            <label
                                 tabIndex={0}
+                                className="btn btn-ghost btn-circle avatar tooltip tooltip-left "
+                                data-tip={user?.displayName || "User"}
                                 role="button"
-                                className="btn btn-ghost btn-circle avatar"
-                                title={user.name}>
+                            >
                                 <div className="w-10 rounded-full">
-                                    <img alt="User Profile" src={user.photoURL} />
+                                    <img
+                                        src={user?.photoURL?.split("?")[0] || "https://via.placeholder.com/150"}
+                                        alt="User Avatar"
+                                    />
                                 </div>
-                            </div>
+                            </label>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-60 p-2 shadow">
-                                <li>
-                                    <span className="px-4 py-2 text-sm">Hello, {user.name}</span>
-                                </li>
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                 <li>
                                     <NavLink
                                         to="/create"
@@ -103,11 +108,11 @@ const Navbar = () => {
                                     <NavLink
                                         to="/my-attempted"
                                         className={({ isActive }) => (isActive ? activeClassName : undefined)}>
-                                        My Attempted Assignments
+                                        My Submissions
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <button className="btn btn-link" onClick={() => console.log("Logout")}>
+                                    <button className="btn btn-link bg-gray-200" onClick={handleLogout}>
                                         Logout
                                     </button>
                                 </li>
