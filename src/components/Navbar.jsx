@@ -6,7 +6,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-
+    const isHome = location.pathname === "/";
     const handleLogout = () => {
         logOut()
             .then(() => { })
@@ -36,8 +36,8 @@ const Navbar = () => {
     );
 
     return (
-        <nav>
-            <div className="navbar bg-base-100 w-11/12 mx-auto">
+        <nav className={isHome ? "bg-gray-100" : undefined}>
+            <div className="navbar  w-11/12 mx-auto">
                 {/* Navbar Start */}
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -57,7 +57,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow">
                             {links}
                         </ul>
                     </div>
@@ -96,7 +96,7 @@ const Navbar = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow">
                                 <li>
                                     <NavLink
                                         to="/create"
