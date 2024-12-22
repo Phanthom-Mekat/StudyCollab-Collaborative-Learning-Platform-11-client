@@ -5,6 +5,7 @@ import ErrorPage from "../pages/ErrorPage";
 import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import CreateAssignment from "../pages/CreateAssignment";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <Home />,
             },
+            {
+                path:'create',
+                element:<CreateAssignment/>
+            }
         ]
     },
     {
