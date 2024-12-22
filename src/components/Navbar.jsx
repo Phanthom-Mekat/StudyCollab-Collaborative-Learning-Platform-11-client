@@ -76,7 +76,7 @@ const Navbar = () => {
                 {/* Navbar End */}
                 <div className="navbar-end">
                     {!user ? (
-                        <NavLink to="/auth/login" className="btn btn-sm rounded-3xl">
+                        <NavLink to="/auth/login" className="btn btn-sm bg-secondary rounded-3xl">
                             <Key size={16} className="text-primary " />  Login
                         </NavLink>
                     ) : (
@@ -112,7 +112,7 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <button className="btn btn-link bg-gray-200" onClick={handleLogout}>
+                                    <button className="btn btn-link bg-secondary" onClick={handleLogout}>
                                         Logout
                                     </button>
                                 </li>

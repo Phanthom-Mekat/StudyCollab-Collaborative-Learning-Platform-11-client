@@ -1,8 +1,11 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { AuthContext } from "../provider/AuthProvider";
+import Lottie from "lottie-react";
+import { Eye, EyeOff, Mail, Lock, AlertCircle, CheckCircle2, Milestone } from 'lucide-react';
+import LottieLogin from '../assets/login.json'
 
 const Login = () => {
     const { userLogin, setUser, signInWithGoogle, setEmail } = useContext(AuthContext);
@@ -10,6 +13,9 @@ const Login = () => {
     const [success, setSuccess] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [isEmailFocused, setIsEmailFocused] = useState(false);
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -67,63 +73,126 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center">
-            <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10">
-                <h2 className="text-2xl font-semibold text-center">
-                    Login to your account
-                </h2>
-                <form onSubmit={handleSubmit} className="card-body">
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="Enter your email"
-                            className="input input-bordered"
-                            required
-                            onChange={handleEmailChange}
-                        />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="Enter your password"
-                            className="input input-bordered"
-                            required
-                        />
+        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 flex flex-col md:flex-row items-center justify-center p-6">
+            <div className="w-full md:w-1/2 max-w-md transform hover:scale-105 transition-transform duration-500">
+                <div className="w-full max-w-sm mx-auto relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
+                    <Lottie animationData={LottieLogin} loop={true} />
+                </div>
+            </div>
+            
+            <div className="w-full md:w-1/2 max-w-md z-10">
+                <div className="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full transform transition-all duration-300 hover:shadow-2xl">
+                    <h2 className="text-4xl font-bold text-center text-gray-800 mb-2">
+                        Welcome Back
+                    </h2>
+                    <p className="text-center text-gray-600 mb-8">Sign in to continue your journey</p>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="relative">
+                            <div className={`relative group ${isEmailFocused ? 'focused' : ''}`}>
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 group-hover:text-primary transition-colors duration-200" />
+                                <input
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                                    required
+                                    onChange={handleEmailChange}
+                                    onFocus={() => setIsEmailFocused(true)}
+                                    onBlur={() => setIsEmailFocused(false)}
+                                />
+                                <label className="absolute left-10 -top-2.5 bg-white px-2 text-sm text-gray-600 transition-all duration-200">
+                                    Email Address
+                                </label>
+                            </div>
+                        </div>
 
-                        {success && <p className="text-green-500 text-sm">Sign in successful!</p>}
-                        {error && <p className="text-red-600 text-sm">{error}</p>}
-                        <label className="label">
-                            <Link to="/auth/forgot" className="label-text-alt link link-hover">
+                        <div className="relative">
+                            <div className={`relative group ${isPasswordFocused ? 'focused' : ''}`}>
+                                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 group-hover:text-primary transition-colors duration-200" />
+                                <input
+                                    name="password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="Enter your password"
+                                    className="w-full pl-10 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                                    required
+                                    onFocus={() => setIsPasswordFocused(true)}
+                                    onBlur={() => setIsPasswordFocused(false)}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                                >
+                                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                </button>
+                                <label className="absolute left-10 -top-2.5 bg-white px-2 text-sm text-gray-600 transition-all duration-200">
+                                    Password
+                                </label>
+                            </div>
+                        </div>
+
+                        {success && (
+                            <div className="flex items-center gap-2 text-green-500 text-sm p-3 bg-green-50 rounded-lg">
+                                <CheckCircle2 className="w-5 h-5" />
+                                <span>Sign in successful!</span>
+                            </div>
+                        )}
+                        {error && (
+                            <div className="flex items-center gap-2 text-red-500 text-sm p-3 bg-red-50 rounded-lg">
+                                <AlertCircle className="w-5 h-5" />
+                                <span>{error}</span>
+                            </div>
+                        )}
+
+                        <div className="flex justify-end">
+                            <Link 
+                                to="/auth/forgot" 
+                                className="text-sm text-primary hover:text-primary-dark transition-colors"
+                            >
                                 Forgot password?
                             </Link>
-                        </label>
-                    </div>
-                    <div
-                        onClick={handleGoogleSignIn}
-                        className="btn w-1/4 mx-auto flex items-center gap-2"
-                    >
-                        <FaGoogle className="text-2xl text-primary " />
-                    </div>
-                    <div className="form-control mt-6">
-                        <button className="btn bg-primary rounded-none">Login</button>
-                    </div>
-                </form>
-                <p className="text-center font-semibold">
-                    Don’t have an account?{" "}
-                    <Link className="text-red-500" to="/auth/register">
-                        Register
-                    </Link>
-                </p>
+                        </div>
+
+                        <button 
+                            type="submit"
+                            className="w-full bg-primary text-white py-3 px-4 rounded-xl hover:bg-primary-dark transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:outline-none shadow-lg hover:shadow-xl"
+                        >
+                            <Milestone className="w-6 h-6 inline mr-1" />
+                            Sign In
+                        </button>
+
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-4 bg-white text-gray-500">Or continue with</span>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            onClick={handleGoogleSignIn}
+                            className="w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-200 rounded-xl hover:bg-gray-50 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 focus:outline-none bg-white/50 backdrop-blur-sm"
+                        >
+                            <FaGoogle className="text-xl text-primary" />
+                            <span className="text-gray-700 font-medium">Continue with Google</span>
+                        </button>
+                    </form>
+                    
+                    <p className="mt-8 text-center text-sm text-gray-600">
+                        Dont have an account?{' '}
+                        <Link 
+                            to="/auth/register" 
+                            className="text-primary hover:text-primary-dark font-medium transition-colors"
+                        >
+                            Create an account
+                        </Link>
+                    </p>
+                </div>
             </div>
-            <Toaster />
         </div>
     );
 };
