@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Loader2 } from 'lucide-react'
+import { Loader2, TimerReset } from 'lucide-react'
 import Swal from 'sweetalert2'
 import { AuthContext } from '@/provider/AuthProvider'
 import toast from 'react-hot-toast'
@@ -96,7 +96,7 @@ const Assignments = () => {
               <img 
                 src={assignment.thumbnailUrl} 
                 alt={assignment.title} 
-                className="w-full h-48 object-cover rounded-t-lg"
+                className="w-full h-72 object-cover rounded-t-lg"
               />
             </CardHeader>
             <CardContent className="p-4">
@@ -107,9 +107,34 @@ const Assignments = () => {
                 </Badge>
                 <span className="font-semibold text-gray-700">Marks: {assignment.marks}</span>
               </div>
+              <div className='text-[12px] text-gray-700 mb-2'>
+                <p>
+                  <TimerReset className="mr-1 h-5 w-5 inline item-center text-primary"/>
+                Deadline:
+                  {new Date(assignment.dueDate).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true,
+                  })}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-700 line-clamp-2">
+                
+                📝{assignment.description}
+                </p>
+              </div>
             </CardContent>
             <CardFooter className="p-4 pt-0 flex justify-between">
-              <Button variant="outline" className="flex-1 mr-2">View</Button>
+              <Button variant="outline" className="flex-1 mr-2">
+                <Link to={`/assignments/${assignment._id}`} className="block w-full text-center">
+                  View
+                </Link>
+              </Button>
               <Button variant="outline" className="flex-1 mr-2">Update</Button>
               <Button 
                 variant="destructive" 

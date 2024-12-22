@@ -7,6 +7,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import CreateAssignment from "../pages/CreateAssignment";
 import Assignments from "@/pages/Assignments";
+import AssignmentDetails from "@/pages/AssignmentDetails";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
                 path:'assignments',
                 element: <Assignments/>,
                 loader: async () => fetch('http://localhost:5000/create').then(res => res.json())
+            },
+            // assignment details
+            { 
+                path:'assignments/:id',
+                element: <AssignmentDetails/>,
+                loader:  ({params}) => fetch(`http://localhost:5000/create/${params.id}`)
             }
         ]
     },
