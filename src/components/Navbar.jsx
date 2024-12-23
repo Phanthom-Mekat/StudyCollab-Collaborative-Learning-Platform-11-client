@@ -13,23 +13,43 @@ const Navbar = () => {
             .catch(err => console.log(err));
     };
 
-    const activeClassName = "font-bold text-primary";
+    const activeClassName = "font-semibold text-primary border-b-2 border-primary transition-all duration-300 hover:text-primary-dark hover:border-primary-dark";
+
+    const inactiveClassName = "font-medium text-gray-600 border-b-2 border-transparent transition-all duration-300 hover:text-primary hover:border-primary";
 
     const links = (
         <>
-            <li>
-                <NavLink to="/" className={({ isActive }) => (isActive ? activeClassName : undefined)}>
+            <li className="py-2">
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
+                    }
+                >
                     Home
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out w-11/12 mx-auto" />
                 </NavLink>
             </li>
-            <li>
-                <NavLink to="/assignments" className={({ isActive }) => (isActive ? activeClassName : undefined)}>
+            <li className="py-2">
+                <NavLink
+                    to="/assignments"
+                    className={({ isActive }) =>
+                        `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
+                    }
+                >
                     Assignments
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out w-11/12 mx-auto" />
                 </NavLink>
             </li>
-            <li>
-                <NavLink to="/pendingassignments" className={({ isActive }) => (isActive ? activeClassName : undefined)}>
+            <li className="py-2">
+                <NavLink
+                    to="/pendingAssignment"
+                    className={({ isActive }) =>
+                        `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
+                    }
+                >
                     Pending Assignments
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out w-11/12 mx-auto" />
                 </NavLink>
             </li>
         </>
@@ -68,7 +88,7 @@ const Navbar = () => {
 
                 {/* Navbar Center */}
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-2">
                         {links}
                     </ul>
                 </div>

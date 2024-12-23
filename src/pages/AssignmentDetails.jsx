@@ -42,6 +42,7 @@ const AssignmentDetails = () => {
             ...formData,
             assignmentId: assignment._id,
             title: assignment.title,
+            imageUrl: assignment.thumbnailUrl,
             marks: assignment.marks,
             userEmail: user.email,
             userName: user.displayName,
