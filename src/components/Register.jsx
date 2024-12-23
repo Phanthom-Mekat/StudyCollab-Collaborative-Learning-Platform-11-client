@@ -98,7 +98,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 flex flex-col md:flex-row items-center justify-center p-6">
+        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 flex flex-col md:flex-row items-center justify-center p-6 pb-10">
             <div className="w-full md:w-1/2 max-w-md transform hover:scale-105 transition-transform duration-500">
                 <div className="w-full max-w-sm mx-auto relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>

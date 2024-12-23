@@ -10,8 +10,8 @@ export default {
   	extend: {
   		colors: {
   			dark: '#0f172a',
-  			'primary': '#ff6a3d',
-  			'secondary': '#ffd7be',
+  			'primary': '#4f46e5',
+  			'secondary': '#a78bfa',
   			'accent': '#f3f4f6'
   		},
   		borderRadius: {

@@ -11,6 +11,7 @@ import AssignmentDetails from "@/pages/AssignmentDetails";
 import UpdateAssignment from "@/pages/UpdateAssignment";
 import PendingAssignments from "@/pages/PendingAssignments";
 import Mysubmission from "@/pages/Mysubmission";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'create',
-                element:<CreateAssignment/>
+                element: <PrivateRouter><CreateAssignment/></PrivateRouter>,
             },
             {
                 path:'assignments',
@@ -33,23 +34,23 @@ const router = createBrowserRouter([
             // assignment details
             { 
                 path:'assignments/:id',
-                element: <AssignmentDetails/>,
+                element: <PrivateRouter><AssignmentDetails/></PrivateRouter>,
                 loader:  ({params}) => fetch(`http://localhost:5000/create/${params.id}`)
             },
             // update assignment
             {
                 path:'update/:id',
-                element: <UpdateAssignment/>,
+                element: <PrivateRouter><UpdateAssignment/></PrivateRouter>,
                 loader:  ({params}) => fetch(`http://localhost:5000/create/${params.id}`)
                 
             },
             {
                 path: 'pendingAssignment',
-                element: <PendingAssignments />,
+                element: <PrivateRouter><PendingAssignments /></PrivateRouter>,
                 loader: ()=>fetch('http://localhost:5000/submitAssignment')
             },{
                 path: "mySubmission",
-                element: <Mysubmission />,
+                element: <PrivateRouter><Mysubmission /></PrivateRouter>,
             }
         ]
     },

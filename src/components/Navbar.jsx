@@ -57,7 +57,7 @@ const Navbar = () => {
 
     return (
         <nav className={isHome ? "bg-gray-100" : undefined}>
-            <div className="navbar  w-11/12 mx-auto">
+            <div className="navbar  md:w-11/12 mx-auto">
                 {/* Navbar Start */}
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -81,9 +81,16 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost text-xl flex items-center gap-2">
-                        <SiStudyverse size={24} className="text-primary bg-gradient-to-r from-primary/15 to-secondary rounded-md px-" /> StudyCollab
+                    <Link to="/" className="btn btn-ghost text-3xl items-center headerfont">
+                        <SiStudyverse size={24} className="text-primary bg-gradient-to-r inline-flex mr-1 from-primary/15 to-secondary rounded-md px-0" />
+                       <div>
+                       <span className="inline">Study</span>
+                       <span className="headerfont2 text-primary inline ml-0">Collab</span>
+                       </div>
                     </Link>
+
+
+
                 </div>
 
                 {/* Navbar Center */}
