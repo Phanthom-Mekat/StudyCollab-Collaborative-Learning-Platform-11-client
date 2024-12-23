@@ -50,7 +50,8 @@ const PendingAssignments = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ...markingForm,
+                    obtainedMarks: markingForm.marks,
+                    feedback: markingForm.feedback,
                     status: 'completed',
                     examinerEmail: user.email,
                     examinerName: user.displayName

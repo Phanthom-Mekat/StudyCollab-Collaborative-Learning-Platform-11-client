@@ -126,7 +126,7 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <NavLink
-                                        to="/my-attempted"
+                                        to="/mySubmission"
                                         className={({ isActive }) => (isActive ? activeClassName : undefined)}>
                                         My Submissions
                                     </NavLink>
