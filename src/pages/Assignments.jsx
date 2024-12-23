@@ -1,173 +1,194 @@
-import { useState, useEffect, useContext } from 'react'
-import { Link,  useLoaderData, useNavigate } from 'react-router-dom'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Loader2, TimerReset } from 'lucide-react'
-import Swal from 'sweetalert2'
-import { AuthContext } from '@/provider/AuthProvider'
-import toast from 'react-hot-toast'
-
+import  { useState, useEffect, useContext } from 'react';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Loader2, TimerReset, Search, Book } from 'lucide-react';
+import { AuthContext } from '@/provider/AuthProvider';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
+import { Input } from '@/components/ui/input';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 
 const Assignments = () => {
   const { user } = useContext(AuthContext);
   const initialAssignments = useLoaderData();
   const [assignments, setAssignments] = useState(initialAssignments);
-  const [loading] = useState(false);
+  const [search, setSearch] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setAssignments(initialAssignments);
-  }, [initialAssignments]);
+    const fetchAssignments = async () => {
+      setLoading(true);
+      try {
+        let url = 'http://localhost:5000/create';
 
-  const handleUpdate =(id,email)=>{
-    if(email !== user.email){
-      toast.error('Update your own assignment🤡');
+        if (search && difficulty && difficulty !== 'all') {
+          url = `http://localhost:5000/create/search/difficulty/${difficulty}/${search}`;
+        } else if (search) {
+          url = `http://localhost:5000/create/search/${search}`;
+        } else if (difficulty && difficulty !== 'all') {
+          url = `http://localhost:5000/create/difficulty/${difficulty}`;
+        }
+
+        const response = await fetch(url);
+        const data = await response.json();
+        setAssignments(data);
+      } catch (error) {
+        toast.error('Failed to fetch assignments',error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const timer = setTimeout(fetchAssignments, 500);
+    return () => clearTimeout(timer);
+  }, [search, difficulty]);
+
+  const handleUpdate = (id, email) => {
+    if (email !== user?.email) {
+      toast.error('You can only update your own assignments');
       return;
     }
     navigate(`/update/${id}`);
-  }
+  };
 
-  const handleDelete = (id, email) => {
-    if (email !== user.email) {
-      toast.error('Delete your own assignment🤡');
+  const handleDelete = async (id, email) => {
+    if (email !== user?.email) {
+      toast.error('You can only delete your own assignments');
       return;
     }
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+    const result = await Swal.fire({
+      title: 'Delete Assignment',
+      text: "This action cannot be undone.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/create/${id}`, {
-          method: 'DELETE',
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              const updatedAssignments = assignments.filter(
-                (assignment) => assignment._id !== id
-              );
-              setAssignments(updatedAssignments);
-              Swal.fire(
-                'Deleted!',
-                'Your assignment has been deleted.',
-                'success'
-              );
-            }
-          })
-          .catch((error) =>
-            console.error('Failed to delete assignment:', error)
-          );
-      }
+      confirmButtonColor: '#dc2626',
+      cancelButtonColor: '#6b7280',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
     });
-  };
 
-  const getDifficultyColor = (difficulty) => {
-    switch (difficulty) {
-      case 'easy':
-        return 'bg-green-500';
-      case 'medium':
-        return 'bg-yellow-500';
-      case 'hard':
-        return 'bg-red-500';
-      default:
-        return 'bg-gray-500';
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`http://localhost:5000/create/${id}`, {
+          method: 'DELETE',
+        });
+        const data = await response.json();
+        
+        if (data.deletedCount > 0) {
+          setAssignments(prev => prev.filter(assignment => assignment._id !== id));
+          toast.success('Assignment deleted successfully');
+        }
+      } catch (error) {
+        toast.error('Failed to delete assignment',error);
+      }
     }
   };
 
-  if (assignments?.length === 0) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-accent">
-        <Card className="w-full max-w-md">
-          <CardContent className="text-center py-10">
-            <p className="text-xl font-semibold text-gray-700">
-              No assignments found
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-primary">All Assignments</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {assignments?.map((assignment) => (
-          <Card key={assignment._id} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <CardHeader className="p-0">
-              <img 
-                src={assignment.thumbnailUrl} 
-                alt={assignment.title} 
-                className="w-full h-72 object-cover rounded-t-lg"
+    <div className="min-h-screen p-10 md:p-8 bg-gradient-to-b from-gray-50 to-gray-100  mb-20">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="text-center space-y-2">
+          <h1 className="text-4xl font-bold text-primary">Assignments</h1>
+          <p className="text-gray-600">Browse and manage your assignments</p>
+        </div>
+        
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Input
+                type="text"
+                placeholder="Search assignments..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-10 w-full bg-gray-50 border-gray-200"
               />
-            </CardHeader>
-            <CardContent className="p-4">
-              <CardTitle className="text-xl font-bold mb-2 text-primary">{assignment.title}</CardTitle>
-              <div className="flex justify-between items-center mb-2">
-                <Badge className={`${getDifficultyColor(assignment.difficultyLevel)} text-white`}>
-                  {assignment.difficultyLevel}
-                </Badge>
-                <span className="font-semibold text-gray-700">Marks: {assignment.marks}</span>
-              </div>
-              <div className='text-[12px] text-gray-700 mb-2'>
-                <p>
-                  <TimerReset className="mr-1 h-5 w-5 inline item-center text-primary"/>
-                Deadline:
-                  {new Date(assignment.dueDate).toLocaleString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                    hour12: true,
-                  })}
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-700 line-clamp-2">
-                
-                📝{assignment.description}
-                </p>
-              </div>
-            </CardContent>
-            <CardFooter className="p-4 pt-0 flex justify-between">
-              <Button variant="outline" className="flex-1 mr-2">
-                <Link to={`/assignments/${assignment._id}`} className="block w-full text-center">
-                  View
-                </Link>
-              </Button>
-              <Button variant="outline"
-              onClick={() => handleUpdate(assignment._id,assignment.email)}
-              className="flex-1 mr-2"
-              
-              >
-                {/* <Link to={`/update/${assignment._id}`} className="block w-full text-center"> */}
-                  Update
-                {/* </Link> */}
-              </Button>
-              <Button 
-                variant="destructive" 
-                className="flex-1"
-                onClick={() => handleDelete(assignment._id,assignment.email)}
-                disabled={loading}
-              >
-                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Delete'}
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+            </div>
+            <Select value={difficulty} onValueChange={setDifficulty}>
+              <SelectTrigger className="w-full md:w-64 bg-gray-50 border-gray-200">
+                <SelectValue placeholder="Difficulty Level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Levels</SelectItem>
+                <SelectItem value="easy">Easy</SelectItem>
+                <SelectItem value="medium">Medium</SelectItem>
+                <SelectItem value="hard">Hard</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="flex items-center justify-center h-72">
+            <Loader2 className="animate-spin text-primary h-12 w-12" />
+          </div>
+        ) : assignments?.length === 0 ? (
+          <div className="bg-white rounded-xl p-8 text-center">
+            <Book className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">No assignments found</h3>
+            <p className="text-gray-500">Try adjusting your search criteria</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {assignments?.map((assignment) => (
+              <Card key={assignment._id} className="group hover:shadow-xl transition-all duration-300">
+                <CardHeader className="p-0">
+                  <img
+                    src={assignment.thumbnailUrl}
+                    alt={assignment.title}
+                    className="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"
+                  />
+                </CardHeader>
+                <CardContent className="p-6">
+                  <CardTitle className="text-xl font-bold mb-3 text-gray-800 line-clamp-1">
+                    {assignment.title}
+                  </CardTitle>
+                  <div className="flex justify-between items-center mb-3">
+                    <Badge className={`px-3 py-1 ${
+                      assignment.difficultyLevel === 'easy' ? 'bg-green-500' :
+                      assignment.difficultyLevel === 'medium' ? 'bg-yellow-500' :
+                      'bg-red-500'} text-white`}>
+                      {assignment.difficultyLevel}
+                    </Badge>
+                    <span className="text-sm font-medium text-gray-700">
+                      Marks: {assignment.marks}
+                    </span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600 mb-3">
+                    <TimerReset className="mr-2 h-4 w-4" />
+                    <span>Due: {new Date(assignment.dueDate).toLocaleDateString()}</span>
+                  </div>
+                  <p className="text-gray-600 line-clamp-2 text-sm">{assignment.description}</p>
+                </CardContent>
+                <CardFooter className="p-6 pt-0 grid grid-cols-3 gap-2">
+                  <Button variant="outline" asChild>
+                    <Link to={`/assignments/${assignment._id}`}>View</Link>
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    onClick={() => handleUpdate(assignment._id, assignment.email)}
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={() => handleDelete(assignment._id, assignment.email)}
+                  >
+                    Delete
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Assignments
-
+export default Assignments;

@@ -85,7 +85,7 @@ const PendingAssignments = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pt-10 pb-20">
             <h1 className="text-3xl font-bold text-primary mb-8">Pending Assignments</h1>
             
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
