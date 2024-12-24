@@ -12,7 +12,7 @@ export default {
   			dark: '#0f172a',
   			'primary': '#4f46e5',
   			'secondary': '#a78bfa',
-  			'accent': '#f3f4f6'
+  			'accent': '#f3f4f6',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -24,6 +24,10 @@ export default {
   plugins: [
     daisyui,
       // eslint-disable-next-line no-undef
-      require("tailwindcss-animate")
+      require("tailwindcss-animate"),
+	  
 ],
+daisyui: {
+	themes: ["light", "dark", "synthwave"], // Add desired themes
+  },
 }

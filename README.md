@@ -1,8 +1,47 @@
-# React + Vite
+# StudyCollab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A platform for students to submit and view assignments, with features such as marking and grading, and a UI that is easy to use.
 
-Currently, two official plugins are available:
+[Live URL](https://studycolab.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
+
+- Ability for students to submit assignments
+- Ability for teachers to view and mark assignments
+- Ability to search for assignments by student or assignment name
+- Ability to filter assignments by difficulty
+- Ability to view assignment details, including marks and feedback
+- Ability to view a student's submission history
+- Ability to view a student's marks and grades
+- Ability to view a student's average mark and grade
+- Ability to search for assignments by student or assignment name
+
+## Packages Used
+
+- react
+- react-dom
+- react-router-dom
+- @radix-ui/react-dialog
+- @radix-ui/react-slot
+- @radix-ui/react-select
+- @radix-ui/react-progress
+- @radix-ui/react-label
+- class-variance-authority
+- clsx
+- dotenv
+- firebase
+- framer-motion
+- lottie-react
+- lucide-react
+- next-themes
+- react-datepicker
+- react-hot-toast
+- react-icon-cloud
+- react-icons
+- react-router-dom
+- react-toastify
+- radix-icons
+- sweetalert2
+- tailwind-merge
+- tailwindcss-animate
+- vite

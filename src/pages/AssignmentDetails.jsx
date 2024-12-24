@@ -99,7 +99,7 @@ const AssignmentDetails = () => {
             >
                 {/* Header Section */}
                 <div className="md:flex justify-between gap-4 mb-8">
-                    <div className="relative mb-8 rounded-xl overflow-hidden">
+                    <div className="relative mb-8 rounded-xl overflow-hidden ">
                         <img
                             src={assignment.thumbnailUrl || "/api/placeholder/800/400"}
                             alt={assignment.title}
@@ -116,7 +116,7 @@ const AssignmentDetails = () => {
                     </div>
 
                     {/* Content Section */}
-                    <Card className="p-8 mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
+                    <Card className="p-8 mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-neutral-900">
                         <h1 className="text-4xl font-bold mb-6">{assignment.title}</h1>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -141,9 +141,9 @@ const AssignmentDetails = () => {
                             </div>
                         </div>
 
-                        <div className="prose max-w-none mb-8">
+                        <div className="prose max-w-none mb-8 dark:text-neutral-200">
                             <h2 className="text-2xl font-semibold mb-4 ">Description</h2>
-                            <p className="text-gray-700 leading-relaxed">{assignment.description}</p>
+                            <p className="text-gray-700 dark:text-neutral-400 leading-relaxed">{assignment.description}</p>
                         </div>
 
                         {/* Submit Assignment Dialog */}
@@ -153,10 +153,10 @@ const AssignmentDetails = () => {
                                     Take Assignment
                                 </button>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px]">
+                            <DialogContent className="sm:max-w-[425px] dark:bg-neutral-800">
                                 <DialogHeader>
                                     <DialogTitle className="text-2xl font-bold text-primary">Submit Assignment</DialogTitle>
-                                    <DialogDescription className="text-gray-600">
+                                    <DialogDescription className="text-gray-600 dark:text-neutral-300">
                                         Submit your completed assignment here. Please ensure you have followed all instructions.
                                     </DialogDescription>
                                 </DialogHeader>
@@ -211,7 +211,7 @@ const AssignmentDetails = () => {
                 </div>
 
                 {/* Created By Section */}
-                <Card className="p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
+                <Card className="p-6 glass shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-neutral-900">
                     <h3 className="text-xl font-semibold mb-6 text-primary">Created By</h3>
                     <div className="flex items-center gap-6">
                         <div className="avatar">
@@ -220,8 +220,8 @@ const AssignmentDetails = () => {
                             </div>
                         </div>
                         <div>
-                            <p className="font-semibold text-lg text-gray-800">{assignment.name}</p>
-                            <p className="text-sm text-gray-600 flex items-center gap-2 mt-1">
+                            <p className="font-semibold text-lg text-gray-800 dark:text-neutral-100">{assignment.name}</p>
+                            <p className="text-sm text-gray-600 flex items-center gap-2 mt-1 dark:text-neutral-100">
                                 <Mail className="w-4 h-4 text-primary" />
                                 {assignment.email}
                             </p>
@@ -230,6 +230,7 @@ const AssignmentDetails = () => {
                 </Card>
             </motion.div>
         </div>
+
     );
 };
 

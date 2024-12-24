@@ -1,11 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
-import { Key } from "lucide-react";
 import { SiStudyverse } from "react-icons/si";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import InteractiveHoverButton from "./ui/interactive-hover-button";
+import { ThemeContext } from "@/provider/ThemeProvider";
+import { Sling as Hamburger } from "hamburger-react";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
+    const [hamburger, setHamburger] = useState(false);
     const isHome = location.pathname === "/";
     const handleLogout = () => {
         logOut()
@@ -15,13 +19,13 @@ const Navbar = () => {
 
     const activeClassName = "font-semibold text-primary border-b-2 border-primary transition-all duration-300 hover:text-primary-dark hover:border-primary-dark";
 
-    const inactiveClassName = "font-medium text-gray-600 border-b-2 border-transparent transition-all duration-300 hover:text-primary hover:border-primary";
+    const inactiveClassName = "font-medium text-gray-600 dark:text-gray-300 border-b-2 border-transparent transition-all duration-300 hover:text-primary hover:border-primary";
 
     const links = (
         <>
             <li className="py-2">
                 <NavLink
-                    to="/"
+                    to="/" onClick={() => setHamburger(false)}
                     className={({ isActive }) =>
                         `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
                     }
@@ -32,7 +36,7 @@ const Navbar = () => {
             </li>
             <li className="py-2">
                 <NavLink
-                    to="/assignments"
+                    to="/assignments" onClick={() => setHamburger(false)}
                     className={({ isActive }) =>
                         `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
                     }
@@ -43,7 +47,7 @@ const Navbar = () => {
             </li>
             <li className="py-2">
                 <NavLink
-                    to="/pendingAssignment"
+                    to="/pendingAssignment" onClick={() => setHamburger(false)}
                     className={({ isActive }) =>
                         `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
                     }
@@ -56,11 +60,27 @@ const Navbar = () => {
     );
 
     return (
-        <nav className={isHome ? "bg-gray-100" : undefined}>
+        <nav className={isHome ? "bg-gray-100 dark:bg-gray-900 " : undefined}>
             <div className="navbar  md:w-11/12 mx-auto">
                 {/* Navbar Start */}
                 <div className="navbar-start">
-                    <div className="dropdown">
+                    <div className="lg:hidden">
+                        <Hamburger
+                            toggled={hamburger}
+                            toggle={setHamburger}
+                            className="text-primary"
+                        />
+                    </div>
+                    {/* Mobile Dropdown Menu */}
+                    {hamburger && (
+                        <div className="absolute top-[64px] left-0 w-full bg-white dark:bg-gray-800  shadow-lg z-40 lg:hidden" data-aos="fade-down">
+                            <ul className="menu menu-vertical p-4" data-aos="fade-up" data-aos-duration="2000" >
+                               {links}
+                            </ul>
+                        </div>
+                    )}
+
+                    {/* <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -77,16 +97,16 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100  rounded-box z-50 mt-3 w-52 p-2 shadow">
                             {links}
                         </ul>
-                    </div>
+                    </div> */}
                     <Link to="/" className="btn btn-ghost text-3xl items-center headerfont">
-                        <SiStudyverse size={24} className="text-primary bg-gradient-to-r inline-flex mr-1 from-primary/15 to-secondary rounded-md px-0" />
-                       <div>
-                       <span className="inline">Study</span>
-                       <span className="headerfont2 text-primary inline ml-0">Collab</span>
-                       </div>
+                        <SiStudyverse size={24} className="text-primary bg-gradient-to-r inline-flex mr-1 from-primary/15 to-secondary rounded-md px-0 dark:text-secondary dark:bg-gradient-to-r dark:from-primary/90 dark:to-primary" />
+                        <div>
+                            <span className="inline">Study</span>
+                            <span className="headerfont2 text-primary inline ml-0">Collab</span>
+                        </div>
                     </Link>
 
 
@@ -102,9 +122,11 @@ const Navbar = () => {
 
                 {/* Navbar End */}
                 <div className="navbar-end">
+                    <input type="checkbox" value="synthwave" onChange={toggleDarkMode} checked={isDarkMode} className="toggle mr-4 theme-controller" />
+
                     {!user ? (
-                        <NavLink to="/auth/login" className="btn btn-sm bg-secondary rounded-3xl">
-                            <Key size={16} className="text-primary " />  Login
+                        <NavLink to="/auth/login" className="">
+                            <InteractiveHoverButton text="Login" className='bg-secondary dark:bg-primary ' />
                         </NavLink>
                     ) : (
                         <div className="dropdown dropdown-end">
@@ -123,23 +145,23 @@ const Navbar = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-base-100 space-y-3 rounded-box z-50 mt-3 w-52 p-2 shadow">
                                 <li>
                                     <NavLink
                                         to="/create"
-                                        className={({ isActive }) => (isActive ? activeClassName : undefined)}>
+                                        className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
                                         Create Assignments
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink
                                         to="/mySubmission"
-                                        className={({ isActive }) => (isActive ? activeClassName : undefined)}>
+                                        className={({ isActive }) => (isActive ? activeClassName : inactiveClassName)}>
                                         My Submissions
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <button className="btn btn-link bg-secondary" onClick={handleLogout}>
+                                    <button className="btn btn-link dark:bg-primary bg-secondary" onClick={handleLogout}>
                                         Logout
                                     </button>
                                 </li>

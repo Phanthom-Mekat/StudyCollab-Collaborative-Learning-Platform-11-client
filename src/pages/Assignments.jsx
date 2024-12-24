@@ -90,27 +90,27 @@ const Assignments = () => {
   };
 
   return (
-    <div className="min-h-screen p-10 md:p-8 bg-gradient-to-b from-gray-50 to-gray-100  mb-20">
+    <div className="min-h-screen p-10 md:p-8 bg-gradient-to-b dark:from-gray-900 dark:to-gray-800 mb-20">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-4xl font-bold text-primary">Assignments</h1>
-          <p className="text-gray-600">Browse and manage your assignments</p>
+          <h1 className="text-4xl font-bold text-primary dark:text-white">Assignments</h1>
+          <p className="text-gray-600 dark:text-gray-400">Browse and manage your assignments</p>
         </div>
         
-        <div className="bg-white p-6 rounded-xl shadow-md">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md dark:shadow-md-dark">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5 dark:text-gray-300" />
               <Input
                 type="text"
                 placeholder="Search assignments..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 w-full bg-gray-50 border-gray-200"
+                className="pl-10 w-full bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600"
               />
             </div>
             <Select value={difficulty} onValueChange={setDifficulty}>
-              <SelectTrigger className="w-full md:w-64 bg-gray-50 border-gray-200">
+              <SelectTrigger className="w-full md:w-64 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                 <SelectValue placeholder="Difficulty Level" />
               </SelectTrigger>
               <SelectContent>
@@ -128,42 +128,42 @@ const Assignments = () => {
             <Loader2 className="animate-spin text-primary h-12 w-12" />
           </div>
         ) : assignments?.length === 0 ? (
-          <div className="bg-white rounded-xl p-8 text-center">
-            <Book className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">No assignments found</h3>
-            <p className="text-gray-500">Try adjusting your search criteria</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-8 text-center">
+            <Book className="h-16 w-16 mx-auto text-gray-400 dark:text-gray-300 mb-4" />
+            <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">No assignments found</h3>
+            <p className="text-gray-500 dark:text-gray-400">Try adjusting your search criteria</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {assignments?.map((assignment) => (
-              <Card key={assignment._id} className="group hover:shadow-xl transition-all duration-300">
+              <Card key={assignment._id} className="group glass hover:shadow-xl transition-all duration-300 dark:bg-gray-800">
                 <CardHeader className="p-0">
                   <img
                     src={assignment.thumbnailUrl}
                     alt={assignment.title}
-                    className="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"
+                    className="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity dark:group-hover:opacity-70"
                   />
                 </CardHeader>
                 <CardContent className="p-6">
-                  <CardTitle className="text-xl font-bold mb-3 text-gray-800 line-clamp-1">
+                  <CardTitle className="text-xl font-bold mb-3 text-gray-800 dark:text-white line-clamp-1">
                     {assignment.title}
                   </CardTitle>
                   <div className="flex justify-between items-center mb-3">
                     <Badge className={`px-3 py-1 ${
-                      assignment.difficultyLevel === 'easy' ? 'bg-green-500' :
-                      assignment.difficultyLevel === 'medium' ? 'bg-yellow-500' :
-                      'bg-red-500'} text-white`}>
+                      assignment.difficultyLevel === 'easy' ? 'bg-emerald-100 text-emerald-800 ring-1 ring-emerald-600/20 dark:bg-emerald-900 dark:text-emerald-100' :
+                      assignment.difficultyLevel === 'medium' ? 'bg-amber-100 text-amber-600 ring-1 ring-amber-600/20 dark:bg-amber-600 dark:text-amber-100' :
+                      'bg-rose-100 text-rose-800 ring-1 ring-rose-600/20 dark:bg-rose-900 dark:text-rose-100'}  `}>
                       {assignment.difficultyLevel}
                     </Badge>
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-400">
                       Marks: {assignment.marks}
                     </span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600 mb-3">
+                  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
                     <TimerReset className="mr-2 h-4 w-4" />
                     <span>Due: {new Date(assignment.dueDate).toLocaleDateString()}</span>
                   </div>
-                  <p className="text-gray-600 line-clamp-2 text-sm">{assignment.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 line-clamp-2 text-sm">{assignment.description}</p>
                 </CardContent>
                 <CardFooter className="p-6 pt-0 grid grid-cols-3 gap-2">
                   <Button variant="outline" asChild>

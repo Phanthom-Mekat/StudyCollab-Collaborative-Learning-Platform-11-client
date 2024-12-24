@@ -1,14 +1,17 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Users, Calendar, Award, ArrowRight, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import WordRotate from '../ui/word-rotate';
+import NumberTicker from '../ui/number-ticker';
 
 const Banner = () => {
   const [currentImage, setCurrentImage] = useState(0);
-  
+
   const images = [
-    "../../../public/banner.jpg",
-    "../../../public/banner2.avif",
-    "../../../public/banner3.webp"
+    "./banner.jpg",
+    "./banner2.avif",
+    "./banner3.webp"
   ];
 
   const stats = [
@@ -25,7 +28,7 @@ const Banner = () => {
   }, [images.length]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative  overflow-hidden">
       {/* Background Slider */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
@@ -37,9 +40,9 @@ const Banner = () => {
             // exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
           >
-            <div 
+            <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ 
+              style={{
                 backgroundImage: `url(${images[currentImage]})`,
                 filter: 'brightness(0.3)'
               }}
@@ -49,7 +52,7 @@ const Banner = () => {
       </div>
 
       {/* Award Badge */}
-      <motion.div 
+      <motion.div
         className="absolute top-8 right-8 flex items-center bg-primary/60 text-black px-4 py-2 rounded-full"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -60,7 +63,7 @@ const Banner = () => {
       </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-6 py-32">
+      <div className="relative z-10 container mx-auto px-6 py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
           <motion.div
@@ -68,35 +71,36 @@ const Banner = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div 
-              className="inline-block bg-primary/60 text-white px-4 py-2 rounded-full mb-6"
+            <motion.div
+              className="inline-block bg-primary/60 text-black px-4 py-2 rounded-full mb-6"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-sm font-semibold">Join 10,000+ Students</span>
+              <span className="text-sm font-semibold">Join <NumberTicker value={10000}/> + Students</span>
             </motion.div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Transform Your
+            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Transform Your&nbsp;
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                Learning Journey
+                <WordRotate className='' words={["Learning", "Future", "Journey", "Success"]} inline />
               </span>
             </h1>
-
             <p className="text-xl text-gray-300 mb-8">
-              Experience the future of collaborative learning with our award-winning platform. 
+              Experience the future of collaborative learning with our award-winning platform.
               Connect, share, and excel together in a vibrant community of learners.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-12">
-              <motion.button
-                className="bg-gradient-to-r from-primary to-purple-500 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Start Learning Now
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </motion.button>
+              <Link to={"/auth/login"}>
+                <motion.button
+                  className="bg-gradient-to-r from-primary to-purple-500 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Start Learning Now
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </motion.button>
+              </Link>
               <motion.button
                 className="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-lg font-bold text-lg border border-white/20"
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}

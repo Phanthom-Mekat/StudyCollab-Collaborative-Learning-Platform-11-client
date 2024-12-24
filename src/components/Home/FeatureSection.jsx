@@ -5,7 +5,7 @@ import { MdGrading } from "react-icons/md";
 
 const FeatureSection = () => {
     return (
-        <div className="py-16 bg-light overflow-hidden" data-aos="fade-up" 
+        <div className="py-16  dark:bg-gray-900 overflow-hidden" data-aos="fade-up" 
         data-aos-offset="300"
         data-aos-easing="ease-in-sine"
         >
@@ -43,13 +43,13 @@ const FeatureSection = () => {
                         Connect with friends and study together in real-time.
                         </p>
                     </div>
-                    <hr />
-                </li>
+                    <hr className="bg-primary dark:bg-secondary" />
+                    </li>
 
            {/* Step 2 */}
                 <li data-aos="fade-left" data-aos-anchor-placement="bottom-bottom">
-                    <hr />
-                    <div className="timeline-middle p-3 bg-primary/60 rounded-full">
+                <hr className="bg-primary dark:bg-secondary" />
+                <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <IoCreate className="h-5 w-5" />
                     </div>
                     <div className="timeline-end mb-10">
@@ -59,14 +59,14 @@ const FeatureSection = () => {
                         Easily create and share assignments with your study group.
                         </p>
                     </div>
-                    <hr />
-                </li>
+                    <hr className="bg-primary dark:bg-secondary" />
+                    </li>
                 
 
                 {/* Step 3 */}
                 <li data-aos="fade-right" data-aos-anchor-placement="bottom-bottom">
-                    <hr />
-                    <div className="timeline-middle p-3 bg-primary/60 rounded-full">
+                <hr className="bg-primary dark:bg-secondary" />
+                <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <MdGrading className="h-5 w-5" />
                     </div>
                     <div className="timeline-start mb-10 md:text-end">
@@ -75,11 +75,11 @@ const FeatureSection = () => {
                         <p className="text-gray-600">
                         Grade your friends assignments and receive feedback on yours.                        </p>
                     </div>
-                    <hr />
-                </li>
+                    <hr className="bg-primary dark:bg-secondary" />
+                    </li>
                 {/* Step 4 */}
                 <li data-aos="fade-left" data-aos-anchor-placement="bottom-bottom">
-                    <hr />
+                <hr className="bg-primary dark:bg-secondary" />
                     <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <Clock1 className="h-5 w-5" />
                     </div>
@@ -90,13 +90,13 @@ const FeatureSection = () => {
                         Set due dates and study at your own pace.
                         </p>
                     </div>
-                    <hr />
-                </li>
+                    <hr className="bg-primary dark:bg-secondary" />
+                    </li>
               
                 {/* Step 5 */}
                 <li data-aos="fade-right" data-aos-anchor-placement="bottom-bottom">
-                    <hr />
-                    <div className="timeline-middle p-3 bg-primary/60 rounded-full">
+                <hr className="bg-primary dark:bg-secondary" />
+                <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <MessageCircleCode className="h-5 w-5" />
                     </div>
                     <div className="timeline-start mb-10 md:text-end">
@@ -106,12 +106,12 @@ const FeatureSection = () => {
                         Engage in topic-specific discussions with your peers.
                         </p>
                     </div>
-                    <hr />
-                </li>
+                    <hr className="bg-primary dark:bg-secondary" />
+                    </li>
                 {/* Step 5 */}
                 <li data-aos="fade-left" data-aos-anchor-placement="bottom-bottom">
-                    <hr />
-                    <div className="timeline-middle p-3 bg-primary/60 rounded-full">
+                <hr className="bg-primary dark:bg-secondary" />
+                <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <LockKeyhole className="h-5 w-5" />
                     </div>
                     <div className="timeline-end mb-10 ">
@@ -121,7 +121,7 @@ const FeatureSection = () => {
                         Study in a safe, authenticated online space.
                         </p>
                     </div>
-                    <hr />
+                    <hr className="bg-primary dark:bg-secondary" />
                 </li>
             </ul>
         </div>

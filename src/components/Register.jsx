@@ -98,7 +98,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 flex flex-col md:flex-row items-center justify-center p-6 pb-10">
+        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex flex-col md:flex-row items-center justify-center p-6 pb-10">
             <div className="w-full md:w-1/2 max-w-md transform hover:scale-105 transition-transform duration-500">
                 <div className="w-full max-w-sm mx-auto relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
@@ -107,16 +107,18 @@ const Register = () => {
             </div>
             
             <div className="w-full md:w-1/2 max-w-md z-10">
-                <div className="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full transform transition-all duration-300 hover:shadow-2xl">
+            <div className="bg-white/80 dark:bg-gray-800 glass backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full transform transition-all duration-300 hover:shadow-2xl">
                     <h2 className="text-4xl font-bold text-center text-gray-800 mb-2">
                         Create Account
                     </h2>
-                    <p className="text-center text-gray-600 mb-8">Register to start your journey</p>
+                    <p className="text-center text-gray-600 dark:text-gray-300 mb-8">Register to start your journey</p>
                     
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="relative">
                             <div className={`relative group ${isNameFocused ? 'focused' : ''}`}>
-                                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 group-hover:text-primary transition-colors duration-200" />
+                                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700      
+                                dark:text-white
+                                group-hover:text-primary transition-colors duration-200" />
                                 <input
                                     name="name"
                                     type="text"
@@ -141,7 +143,7 @@ const Register = () => {
 
                         <div className="relative">
                             <div className={`relative group ${isEmailFocused ? 'focused' : ''}`}>
-                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 group-hover:text-primary transition-colors duration-200" />
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 dark:text-white group-hover:text-primary transition-colors duration-200" />
                                 <input
                                     name="email"
                                     type="email"
@@ -159,7 +161,7 @@ const Register = () => {
 
                         <div className="relative">
                             <div className={`relative group ${isPhotoFocused ? 'focused' : ''}`}>
-                                <Image className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 group-hover:text-primary transition-colors duration-200" />
+                                <Image className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 dark:text-white group-hover:text-primary transition-colors duration-200" />
                                 <input
                                     name="photo"
                                     type="url"
@@ -177,7 +179,7 @@ const Register = () => {
 
                         <div className="relative">
                             <div className={`relative group ${isPasswordFocused ? 'focused' : ''}`}>
-                                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 group-hover:text-primary transition-colors duration-200" />
+                                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-700 dark:text-white group-hover:text-primary transition-colors duration-200" />
                                 <input
                                     name="password"
                                     type={showPassword ? 'text' : 'password'}
