@@ -27,6 +27,8 @@ const UpdateAssignment = () => {
   const [thumbnailUrl, setThumbnailUrl] = useState(loadedAssignment.thumbnailUrl || "");
   const [difficultyLevel, setDifficultyLevel] = useState(loadedAssignment.difficultyLevel || "");
   const [dueDate, setDueDate] = useState(loadedAssignment.dueDate ? new Date(loadedAssignment.dueDate) : new Date());
+ 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -44,6 +46,7 @@ const UpdateAssignment = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(updatedAssignment),
       });
 

@@ -3,16 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import {  FileText, Calendar, Award } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+// import axios from "axios";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const MySubmission = () => {
     const { user } = useContext(AuthContext);
     const [submissions, setSubmissions] = useState([]);
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/submitAssignment/${user?.email}`)
-            .then(res => res.json())
+        axiosSecure.get(`/submitAssignment/${user?.email}`)
+            .then(res => res.data)
             .then(data => setSubmissions(data))
-    }, [user?.email]);
+    }, [axiosSecure, user?.email]);
 
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-US', {

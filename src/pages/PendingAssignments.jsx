@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import { useLoaderData } from "react-router-dom";
+import { useState, useContext, useEffect } from 'react';
+// import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from 'react-hot-toast';
 import {
@@ -9,9 +9,11 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { ExternalLink, Clock, Award, User } from 'lucide-react';
+// import axios from 'axios';
+import useAxiosSecure from '@/hooks/useAxiosSecure';
 
 const PendingAssignments = () => {
-    const loadedAssignments = useLoaderData();
+    const [pendingSubmissions, setPendingSubmissions] = useState([]);
     const { user } = useContext(AuthContext);
     const [isMarkingModalOpen, setIsMarkingModalOpen] = useState(false);
     const [selectedSubmission, setSelectedSubmission] = useState(null);
@@ -19,11 +21,21 @@ const PendingAssignments = () => {
         marks: '',
         feedback: ''
     });
+    const axiosSecure = useAxiosSecure();
+    useEffect(() => {
+        const fetchPendingSubmissions = async () => {
+            try {
+                const response = await axiosSecure.get('/submitAssignment');
+                setPendingSubmissions(response.data.filter(submission => 
+                    submission.status === 'pending'
+                ));
+            } catch (error) {
+                toast.error('Failed to fetch pending submissions',error);
+            }
+        };
 
-    // Filter only pending assignments
-    const [pendingSubmissions, setPendingSubmissions] = useState(loadedAssignments.filter(submission => 
-        submission.status === 'pending'
-    ));
+        fetchPendingSubmissions();
+    }, [axiosSecure]);
 
     const handleGiveMark = (submission) => {
         if (submission.userEmail === user?.email) {
@@ -49,6 +61,7 @@ const PendingAssignments = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     obtainedMarks: markingForm.marks,
                     feedback: markingForm.feedback,

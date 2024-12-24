@@ -56,6 +56,7 @@ const AssignmentDetails = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify(submissionData),
             });
             if (!response.ok) {

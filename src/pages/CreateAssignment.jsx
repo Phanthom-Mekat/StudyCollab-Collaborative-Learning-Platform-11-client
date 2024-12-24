@@ -41,6 +41,7 @@ const CreateAssignment = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(assignmentData),
       })
 
@@ -54,7 +55,7 @@ const CreateAssignment = () => {
       }
     } catch (error) {
       console.error('Error creating assignment:', error)
-      toast.error('An error occurred while creating the assignment')
+      toast.error('An error occurred while creating the assignment',error)
     }
   }
 
