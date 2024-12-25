@@ -56,6 +56,18 @@ const Navbar = () => {
                     <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out w-11/12 mx-auto" />
                 </NavLink>
             </li>
+            <li className="py-2">
+                <NavLink
+                    to="/leaderboard" onClick={() => setHamburger(false)}
+                    className={({ isActive }) =>
+                        `px-3 py-2 relative group ${isActive ? activeClassName : inactiveClassName}`
+                    }
+                >
+                    Leaderboard<div className="badge text-[8px] bg-primary">NEW</div>
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out w-11/12 mx-auto" />
+                </NavLink>
+            </li>
+
         </>
     );
 

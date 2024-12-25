@@ -12,6 +12,7 @@ import UpdateAssignment from "@/pages/UpdateAssignment";
 import PendingAssignments from "@/pages/PendingAssignments";
 import Mysubmission from "@/pages/Mysubmission";
 import PrivateRouter from "./PrivateRouter";
+import GamificationDashboard from "@/pages/GamificationDashboard";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             },{
                 path: "mySubmission",
                 element: <PrivateRouter><Mysubmission /></PrivateRouter>,
+            },
+            {
+                path:'leaderboard',
+                element: <PrivateRouter><GamificationDashboard /></PrivateRouter>,
             }
         ]
     },

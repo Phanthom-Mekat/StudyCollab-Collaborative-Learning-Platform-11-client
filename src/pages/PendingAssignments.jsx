@@ -26,11 +26,11 @@ const PendingAssignments = () => {
         const fetchPendingSubmissions = async () => {
             try {
                 const response = await axiosSecure.get('/submitAssignment');
-                setPendingSubmissions(response.data.filter(submission => 
+                setPendingSubmissions(response.data.filter(submission =>
                     submission.status === 'pending'
                 ));
             } catch (error) {
-                toast.error('Failed to fetch pending submissions',error);
+                toast.error('Failed to fetch pending submissions', error);
             }
         };
 
@@ -49,7 +49,7 @@ const PendingAssignments = () => {
 
     const handleMarkSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (Number(markingForm.marks) > selectedSubmission.marks) {
             toast.error(`Marks cannot exceed maximum marks (${selectedSubmission.marks})`);
             return;
@@ -75,7 +75,7 @@ const PendingAssignments = () => {
 
             toast.success('Assignment marked successfully!');
             setIsMarkingModalOpen(false);
-            
+
             setPendingSubmissions(
                 pendingSubmissions.filter((s) => s._id !== selectedSubmission._id)
             );
@@ -88,9 +88,9 @@ const PendingAssignments = () => {
 
     if (pendingSubmissions.length === 0) {
         return (
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold text-primary mb-8">Pending Assignments</h1>
-                <div className="bg-white dark:bg-dark-foreground rounded-lg shadow-lg p-8 text-center">
+            <div className="container mx-auto px-4 py-8 dark:text-white mb-20 dark:bg-gray-800 ">
+                <h1 className="text-3xl font-bold text-primary  mb-8">Pending Assignments</h1>
+                <div className="bg-white dark:bg-dark rounded-lg shadow-lg p-8 text-center">
                     <p className="text-gray-600 dark:text-gray-300">No pending assignments to mark.</p>
                 </div>
             </div>
@@ -100,7 +100,7 @@ const PendingAssignments = () => {
     return (
         <div className="container mx-auto px-4 pt-10 pb-20 ">
             <h1 className="text-3xl font-bold text-primary dark:text-white mb-8">Pending Assignments</h1>
-            
+
             <div className="bg-white dark:bg-dark-foreground rounded-lg shadow-lg overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
@@ -116,13 +116,13 @@ const PendingAssignments = () => {
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700  ">
                             {pendingSubmissions.map((submission) => (
                                 <tr key={submission._id} className={`
-                                    hover:bg-gray-50 dark:hover:bg-dark/50 transition-colors
+                                    hover:bg-gray-50 dark:hover:bg-dark/90 transition-colors
                                     ${submission.userEmail === user?.email ? 'bg-gray-50 dark:bg-dark' : 'dark:bg-dark'}
                                 `}>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-4">
-                                            <img 
-                                                src={submission.imageUrl || "/api/placeholder/100/100"} 
+                                            <img
+                                                src={submission.imageUrl || "/api/placeholder/100/100"}
                                                 alt={submission.title}
                                                 className="w-12 h-12 rounded-lg object-cover"
                                             />
@@ -159,8 +159,8 @@ const PendingAssignments = () => {
                                         <button
                                             onClick={() => handleGiveMark(submission)}
                                             className={`
-                                                px-4 py-2 text-sm font-medium rounded-lg transition-colors
-                                                ${submission.userEmail === user?.email 
+                                                px-4 py-2 glass text-sm font-medium rounded-lg transition-colors
+                                                ${submission.userEmail === user?.email
                                                     ? 'bg-gray-100 text-gray-600 cursor-not-allowed dark:bg-dark-foreground dark:text-gray-300'
                                                     : 'bg-primary text-white hover:bg-primary/90 dark:bg-primary dark:text-white dark:hover:bg-primary/90'}
                                             `}
@@ -196,17 +196,22 @@ const PendingAssignments = () => {
 
                             <div className="mb-6 p-4 bg-gray-50 dark:bg-dark rounded-lg">
                                 <h4 className="font-medium mb-2">Submission Details</h4>
-                                <a 
+                                <a
                                     href={selectedSubmission.googleDocsLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-primary  hover:underline mb-3"
+                                    className="flex items-center gap-2 text-primary hover:underline mb-3"
                                 >
                                     <ExternalLink className="w-4 h-4" />
                                     View Submission
                                 </a>
-                                <p className="text-sm text-gray-600 dark:text-gray-300">{selectedSubmission.quickNote}</p>
+                                <div
+                                    className="text-sm text-gray-600 dark:text-gray-300 break-words max-h-40 overflow-y-auto"
+                                >
+                                    {selectedSubmission.quickNote}
+                                </div>
                             </div>
+
 
                             <form onSubmit={handleMarkSubmit} className="space-y-4">
                                 <div>
@@ -220,7 +225,7 @@ const PendingAssignments = () => {
                                         max={selectedSubmission.marks}
                                         className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:bg-dark-foreground dark:text-white dark:focus:ring-2 dark:focus:ring-primary dark:focus:border-primary"
                                         value={markingForm.marks}
-                                        onChange={(e) => setMarkingForm({...markingForm, marks: e.target.value})}
+                                        onChange={(e) => setMarkingForm({ ...markingForm, marks: e.target.value })}
                                     />
                                 </div>
 
@@ -233,7 +238,7 @@ const PendingAssignments = () => {
                                         rows="4"
                                         className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:bg-dark-foreground dark:text-white dark:focus:ring-2 dark:focus:ring-primary dark:focus:border-primary"
                                         value={markingForm.feedback}
-                                        onChange={(e) => setMarkingForm({...markingForm, feedback: e.target.value})}
+                                        onChange={(e) => setMarkingForm({ ...markingForm, feedback: e.target.value })}
                                     />
                                 </div>
 

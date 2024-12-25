@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
@@ -33,6 +33,9 @@ const AssignmentDetails = () => {
         googleDocsLink: '',
         quickNote: ''
     });
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -103,7 +106,7 @@ const AssignmentDetails = () => {
                         <img
                             src={assignment.thumbnailUrl || "/api/placeholder/800/400"}
                             alt={assignment.title}
-                            className="object-cover h-96 transition-transform hover:scale-105 duration-300"
+                            className="object-cover h-96  transition-transform hover:scale-105 duration-300"
                         />
                         <div className="absolute top-4 right-4">
                             <span className={`

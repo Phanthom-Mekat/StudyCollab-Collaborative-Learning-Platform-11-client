@@ -15,6 +15,7 @@ A platform for students to submit and view assignments, with features such as ma
 - Ability to view a student's marks and grades
 - Ability to view a student's average mark and grade
 - Ability to search for assignments by student or assignment name
+- Ability to see leaderboard of students with highest point
 
 ## Packages Used
 

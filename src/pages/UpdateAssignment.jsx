@@ -63,9 +63,9 @@ const UpdateAssignment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-accent flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        <CardHeader className="bg-primary text-white p-6">
+    <div className="min-h-screen bg-accent dark:bg-dark flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+        <CardHeader className="bg-primary dark:bg-primary text-white dark:text-gray-100 p-6">
           <CardTitle className="flex items-center h-font text-center gap-2 text-2xl font-bold">
             <ClipboardList className="w-8 h-8" />
             Update Assignment
@@ -76,13 +76,13 @@ const UpdateAssignment = () => {
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
               <div className="flex items-center space-x-2 y rounded-md p-2">
-                <BookOpen className="w-5 h-5 text-primary" />
+                <BookOpen className="w-5 h-5 text-primary dark:text-primary" />
                 <Input
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
               </div>
             </div>
@@ -95,14 +95,14 @@ const UpdateAssignment = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
                 required
-                className="w-full b rounded-md p-2 text-gray-900 placeholder-gray-500"
+                className="w-full b rounded-md p-2 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="marks">Marks</Label>
               <div className="flex items-center space-x-2 rounded-md p-2">
-                <Trophy className="w-5 h-5 text-primary" />
+                <Trophy className="w-5 h-5 text-primary dark:text-primary" />
                 <Input
                   id="marks"
                   type="number"
@@ -110,7 +110,7 @@ const UpdateAssignment = () => {
                   onChange={(e) => setMarks(e.target.value)}
                   min="0"
                   required
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
               </div>
             </div>
@@ -118,13 +118,13 @@ const UpdateAssignment = () => {
             <div className="space-y-2">
               <Label htmlFor="thumbnailUrl">Thumbnail Image URL</Label>
               <div className="flex items-center space-x-2 rounded-md p-2">
-                <Image className="w-5 h-5 text-primary" />
+                <Image className="w-5 h-5 text-primary dark:text-primary" />
                 <Input
                   id="thumbnailUrl"
                   value={thumbnailUrl}
                   onChange={(e) => setThumbnailUrl(e.target.value)}
                   required
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ const UpdateAssignment = () => {
                 onValueChange={setDifficultyLevel}
                 required
               >
-                <SelectTrigger className="w-full  text-gray-900">
+                <SelectTrigger className="w-full  text-gray-900 dark:text-gray-100">
                   <SelectValue placeholder="Select Difficulty Level" />
                 </SelectTrigger>
                 <SelectContent>
@@ -150,7 +150,7 @@ const UpdateAssignment = () => {
             <div className="space-y-2">
               <Label htmlFor="dueDate">Due Date</Label>
               <div className="flex items-center space-x-2 rounded-md p-2">
-                <CalendarIcon className="w-5 h-5 text-primary" />
+                <CalendarIcon className="w-5 h-5 text-primary dark:text-primary" />
                 <DatePicker
                   selected={dueDate}
                   onChange={(date) => setDueDate(date)}
@@ -159,13 +159,13 @@ const UpdateAssignment = () => {
                   timeIntervals={15}
                   timeCaption="time"
                   dateFormat="MMMM d, yyyy h:mm aa"
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                   required
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
+            <Button type="submit" className="w-full glass bg-primary dark:bg-primary-dark hover:bg-primary/90 dark:hover:bg-primary-dark/90 text-white dark:text-gray-100 font-bold py-3 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
               Update Assignment
             </Button>
           </form>

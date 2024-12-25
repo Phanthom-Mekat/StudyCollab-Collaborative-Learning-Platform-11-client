@@ -18,7 +18,9 @@ const Assignments = () => {
   const [difficulty, setDifficulty] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     const fetchAssignments = async () => {
       setLoading(true);
@@ -89,8 +91,10 @@ const Assignments = () => {
     }
   };
 
+
+
   return (
-    <div className="min-h-screen p-10 md:p-8 bg-gradient-to-b dark:from-gray-900 dark:to-gray-800 mb-20">
+    <div className="min-h-screen p-10 md:p-8 dark:bg-gray-900 mb-20">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold text-primary dark:text-white">Assignments</h1>

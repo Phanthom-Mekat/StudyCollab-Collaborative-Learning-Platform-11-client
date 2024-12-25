@@ -60,9 +60,9 @@ const CreateAssignment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-accent flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        <CardHeader className="bg-primary text-white p-6">
+    <div className="min-h-screen bg-accent dark:bg-dark flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+        <CardHeader className="bg-primary dark:bg-primary-dark text-white p-6">
           <CardTitle className="flex items-center h-font text-center gap-2 text-2xl font-bold">
             <ClipboardList className="w-8 h-8" />
             Create New Assignment
@@ -71,33 +71,33 @@ const CreateAssignment = () => {
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="title" className="text-sm font-medium text-gray-700">Title</Label>
+              <Label htmlFor="title" className="text-sm font-medium text-gray-700 dark:text-gray-300">Title</Label>
               <div className="flex items-center space-x-2 y rounded-md p-2">
                 <BookOpen className="w-5 h-5 text-primary" />
                 <Input
                   id="title"
                   name="title"
                   required
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="Enter assignment title"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description" className="text-sm font-medium text-gray-700">Description</Label>
+              <Label htmlFor="description" className="text-sm font-medium text-gray-700 dark:text-gray-300">Description</Label>
               <Textarea
                 id="description"
                 name="description"
                 required
-                className="w-full b rounded-md p-2 text-gray-900 placeholder-gray-500"
+                className="w-full b rounded-md p-2 text-gray-900 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
                 placeholder="Enter assignment description"
                 rows={4}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="marks" className="text-sm font-medium text-gray-700">Marks</Label>
+              <Label htmlFor="marks" className="text-sm font-medium text-gray-700 dark:text-gray-300">Marks</Label>
               <div className="flex items-center space-x-2  rounded-md p-2">
                 <Trophy className="w-5 h-5 text-primary" />
                 <Input
@@ -106,30 +106,30 @@ const CreateAssignment = () => {
                   type="number"
                   required
                   min="0"
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="Enter total marks"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="thumbnailUrl" className="text-sm font-medium text-gray-700">Thumbnail Image URL</Label>
+              <Label htmlFor="thumbnailUrl" className="text-sm font-medium text-gray-700 dark:text-gray-300">Thumbnail Image URL</Label>
               <div className="flex items-center space-x-2  rounded-md p-2">
                 <Image className="w-5 h-5 text-primary" />
                 <Input
                   id="thumbnailUrl"
                   name="thumbnailUrl"
                   required
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="Enter thumbnail URL"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="difficultyLevel" className="text-sm font-medium text-gray-700">Difficulty Level</Label>
+              <Label htmlFor="difficultyLevel" className="text-sm font-medium text-gray-700 dark:text-gray-300">Difficulty Level</Label>
               <Select onValueChange={setDifficultyLevel} required>
-                <SelectTrigger className="w-full  text-gray-900">
+                <SelectTrigger className="w-full  text-gray-900 dark:text-gray-300">
                   <SelectValue placeholder="Select Difficulty Level" />
                 </SelectTrigger>
                 <SelectContent>
@@ -141,7 +141,7 @@ const CreateAssignment = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="dueDate" className="text-sm font-medium text-gray-700">Due Date</Label>
+              <Label htmlFor="dueDate" className="text-sm font-medium text-gray-700 dark:text-gray-300">Due Date</Label>
               <div className="flex items-center space-x-2 rounded-md p-2">
                 <CalendarIcon className="w-5 h-5 text-primary" />
                 <DatePicker
@@ -152,13 +152,13 @@ const CreateAssignment = () => {
                   timeIntervals={15}
                   timeCaption="time"
                   dateFormat="MMMM d, yyyy h:mm aa"
-                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-500"
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
                   required
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
+            <Button type="submit" className="w-full bg-primary dark:bg-primary-dark hover:bg-primary/90 dark:hover:bg-primary-dark/90 text-white font-bold py-3 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
               Create Assignment
             </Button>
           </form>
