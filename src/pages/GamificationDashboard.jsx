@@ -31,39 +31,39 @@ const GamificationDashboard = () => {
     }, [axiosSecure, user.email]);
 
     const getBadgeColor = (points) => {
-        if (points >= 1000) return 'bg-purple-600';
-        if (points >= 500) return 'bg-blue-600';
-        return 'bg-green-600';
+        if (points >= 1000) return 'bg-gradient-to-r from-purple-600 to-purple-800';
+        if (points >= 500) return 'bg-gradient-to-r from-blue-600 to-blue-800';
+        return 'bg-gradient-to-r from-green-600 to-green-800';
     };
 
 
     const pointGuide = [
-        { action: 'Submit an Assignment & graded', points: '10 points' },
-        { action: 'Grade an Assignment', points: '5 points' },
-        { action: 'Get Perfect Score', points: '15 points' },
-        { action: '7-Day Streak', points: '20 points' },
-        { action: 'Monthly Top Position', points: '50 points' },
-        { action: 'First Submission', points: '50 points' },
-        { action: 'Perfect Week Streak', points: '100 points' },
-        { action: 'Grade 10 Assignments', points: '75 points' },
-        { action: 'Top Monthly Performer', points: '200 points' }
+        { action: 'Graded Assignment', points: '10 points', icon: '📝' },
+        { action: 'Grade an Assignment', points: '5 points', icon: '✅' },
+        { action: 'Get Perfect Score', points: '15 points', icon: '⭐' },
+        { action: '7-Day Streak', points: '20 points', icon: '🔥' },
+        { action: 'Monthly Top Position', points: '50 points', icon: '🏆' },
+        { action: 'First Submission', points: '50 points', icon: '🎯' },
+        { action: 'Perfect Week Streak', points: '100 points', icon: '⚡' },
+        { action: 'Grade 10 Assignments', points: '75 points', icon: '🎓' },
+        { action: 'Top Monthly Performer', points: '200 points', icon: '👑' }
     ];
 
     if (!stats) return <div className="flex justify-center p-8">
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-200  ">
-        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 dark:text-white ">
-            <FaCrown className="text-yellow-500" />
-            How to Earn Points
-        </h2>
-        <div className="space-y-3">
-            {pointGuide.map((item, index) => (
-                <div key={index} className="flex justify-between items-center text-sm  ">
-                    <span className="text-gray-700 dark:text-gray-400    ">{item.action}</span>
-                    <span className="font-semibold text-green-600">{item.points}</span>
-                </div>
-            ))}
-        </div>
-    </div></div>;
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 dark:text-white ">
+                <FaCrown className="text-yellow-500" />
+                How to Earn Points
+            </h2>
+            <div className="space-y-3">
+                {pointGuide.map((item, index) => (
+                    <div key={index} className="flex justify-between items-center text-sm  ">
+                        <span className="text-gray-700 dark:text-gray-400    ">{item.action}</span>
+                        <span className="font-semibold text-green-600">{item.points}</span>
+                    </div>
+                ))}
+            </div>
+        </div></div>;
 
 
     return (
@@ -92,77 +92,72 @@ const GamificationDashboard = () => {
 
             {/* Stats Overview */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-                    <FaTrophy className="text-4xl text-yellow-500 mb-2" />
-                    <h3 className="text-2xl font-bold dark:text-white">{stats.points}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">Total Points</p>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-                    <FaStar className="text-4xl text-yellow-500 mb-2" />
-                    <h3 className="text-2xl font-bold dark:text-white">{stats.monthlyPoints}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">Monthly Points</p>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-                    <FaFire className="text-4xl text-red-500 mb-2" />
-                    <h3 className="text-2xl font-bold dark:text-white">{stats.currentStreak}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">Day Streak</p>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-                    <FaMedal className="text-4xl text-blue-500 mb-2" />
-                    <h3 className="text-2xl font-bold dark:text-white">#{leaderboard.findIndex(p => p.userEmail === user.email) + 1 || '-'}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">Global Rank</p>
-                </div>
+                {[
+                    { icon: FaTrophy, value: stats.points, label: 'Total Points', color: 'yellow' },
+                    { icon: FaStar, value: stats.monthlyPoints, label: 'Monthly Points', color: 'yellow' },
+                    { icon: FaFire, value: stats.currentStreak, label: 'Day Streak', color: 'red' },
+                    { icon: FaMedal, value: `#${leaderboard.findIndex(p => p.userEmail === user.email) + 1 || '-'}`, label: 'Global Rank', color: 'blue' }
+                ].map((item, index) => (
+                    <div key={index} className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600 transform hover:scale-105 transition-transform duration-300">
+                        <item.icon className={`text-4xl text-${item.color}-500 mb-2`} />
+                        <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{item.value}</h3>
+                        <p className="text-gray-600 dark:text-gray-300">{item.label}</p>
+                    </div>
+                ))}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Point Guide */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-600">
                     <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 dark:text-white">
-                        <FaCrown className="text-yellow-500" />
+                        <FaCrown className="text-yellow-500 animate-pulse" />
                         How to Earn Points
                     </h2>
                     <div className="space-y-3">
                         {pointGuide.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center text-sm dark:text-gray-300">
-                                <span className="text-gray-700 dark:text-gray-300">{item.action}</span>
+                            <div key={index} className="flex items-center justify-between text-sm dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 p-2 rounded-lg transition-colors duration-200">
+                                <span className="flex items-center gap-2">
+                                    <span className="text-xl">{item.icon}</span>
+                                    <span className="text-gray-700 dark:text-gray-300">{item.action}</span>
+                                </span>
                                 <span className="font-semibold text-green-600 dark:text-green-400">{item.points}</span>
                             </div>
                         ))}
                     </div>
                 </div>
 
+
                 {/* Achievements */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl glass p-6 shadow-lg border border-gray-100 dark:border-gray-700 lg:col-span-2">
-                    <h2 className="text-2xl font-bold mb-4 dark:text-white">Your Achievements</h2>
+                <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-600 lg:col-span-2">
+                    <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center gap-2">
+                        <FaTrophy className="text-yellow-500 animate-spin-slow" />
+                        Your Achievements
+                    </h2>
                     {stats.achievements?.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {stats.achievements.map((achievement) => (
                                 <div
                                     key={achievement.id}
-                                    className={`${getBadgeColor(achievement.points)} text-white p-4 rounded-lg`}
+                                    className={`${getBadgeColor(achievement.points)} p-4 rounded-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl`}
                                 >
                                     <div className="flex items-center gap-2">
                                         <span className="text-2xl">{achievement.icon}</span>
-                                        <h3 className="font-bold">{achievement.name}</h3>
+                                        <h3 className="font-bold text-white">{achievement.name}</h3>
                                     </div>
-                                    <p className="text-sm mt-2">{achievement.description}</p>
-                                    <p className="text-sm mt-2">+{achievement.points} points</p>
+                                    <p className="text-sm mt-2 text-gray-100">{achievement.description}</p>
+                                    <p className="text-sm mt-2 font-bold text-white">+{achievement.points} points</p>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                            <FaCheckCircle className="mx-auto text-4xl mb-3 text-gray-400 dark:text-gray-500" />
-                            <p>Complete tasks to unlock achievements!</p>
-                            <p className="text-sm mt-2">Submit assignments, grade peers, and maintain streaks.</p>
+                        <div className="text-center py-8 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <FaCheckCircle className="mx-auto text-5xl mb-3 text-gray-400 dark:text-gray-500 animate-bounce" />
+                            <p className="text-gray-600 dark:text-gray-300 font-medium">Complete tasks to unlock achievements!</p>
+                            <p className="text-sm mt-2 text-gray-500 dark:text-gray-400">Submit assignments, grade peers, and maintain streaks.</p>
                         </div>
                     )}
                 </div>
             </div>
-
             {/* Leaderboards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* All-Time Leaderboard */}
@@ -220,6 +215,7 @@ const GamificationDashboard = () => {
                         </table>
                     </div>
                 </div>
+                
             </div>
         </div>
     );

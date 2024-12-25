@@ -56,7 +56,7 @@ const PendingAssignments = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/submitAssignment/${selectedSubmission._id}`, {
+            const response = await fetch(`https://batcht-10-assignment-11-server.vercel.app/submitAssignment/${selectedSubmission._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

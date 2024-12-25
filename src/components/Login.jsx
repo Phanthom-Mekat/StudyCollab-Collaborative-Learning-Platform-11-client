@@ -62,8 +62,8 @@ const Login = () => {
                 navigate(location?.state ? location.state : "/");
             })
             .catch((err) => {
-                console.log(err);
-                toast.error('This is an error!');
+                // console.log(err);
+                toast.error('This is an error!',err);
             });
     };
 

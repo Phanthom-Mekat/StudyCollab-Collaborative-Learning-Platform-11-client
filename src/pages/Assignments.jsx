@@ -25,14 +25,14 @@ const Assignments = () => {
     const fetchAssignments = async () => {
       setLoading(true);
       try {
-        let url = 'http://localhost:5000/create';
+        let url = 'https://batcht-10-assignment-11-server.vercel.app/create';
 
         if (search && difficulty && difficulty !== 'all') {
-          url = `http://localhost:5000/create/search/difficulty/${difficulty}/${search}`;
+          url = `https://batcht-10-assignment-11-server.vercel.app/create/search/difficulty/${difficulty}/${search}`;
         } else if (search) {
-          url = `http://localhost:5000/create/search/${search}`;
+          url = `https://batcht-10-assignment-11-server.vercel.app/create/search/${search}`;
         } else if (difficulty && difficulty !== 'all') {
-          url = `http://localhost:5000/create/difficulty/${difficulty}`;
+          url = `https://batcht-10-assignment-11-server.vercel.app/create/difficulty/${difficulty}`;
         }
 
         const response = await fetch(url);
@@ -76,7 +76,7 @@ const Assignments = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`http://localhost:5000/create/${id}`, {
+        const response = await fetch(`https://batcht-10-assignment-11-server.vercel.app/create/${id}`, {
           method: 'DELETE',
         });
         const data = await response.json();

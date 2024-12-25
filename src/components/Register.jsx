@@ -56,14 +56,14 @@ const Register = () => {
             .then((result) => {
                 const user = result.user;
                 setUser(user);
-                console.log(user);
+                // console.log(user);
                 updateUserProfile({ displayName: name, photoURL: photo })
                     .then(() => {
                         navigate(location?.state ? location.state : "/");
                         toast.success("Registered successfully.");
 
                         const newUser = { name, email, photo }
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://batcht-10-assignment-11-server.vercel.app/users', {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"
@@ -72,13 +72,16 @@ const Register = () => {
                         })
                             .then(res => res.json())
                             .then(data => {
-                                console.log(data);
+                                // console.log(data);
+                                if (data.insertedId) {
+                                    toast.success("Registered successfully.");
+                                }
                             })
                     })
                     .catch((err) => console.log(err));
             })
             .catch((err) => {
-                console.log(err);
+                // console.log(err);
                 setError({ register: err.message });
             });
     };

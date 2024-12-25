@@ -36,7 +36,7 @@ const CreateAssignment = () => {
         email: user.email,
         name: user.displayName
       }
-      const response = await fetch('http://localhost:5000/create', {
+      const response = await fetch('https://batcht-10-assignment-11-server.vercel.app/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

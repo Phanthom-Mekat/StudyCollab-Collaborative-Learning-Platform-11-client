@@ -91,7 +91,7 @@ const Banner = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-12">
-              <Link to={"/auth/login"}>
+              <Link to={"/assignments"}>
                 <motion.button
                   className="bg-gradient-to-r from-primary to-purple-500 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center"
                   whileHover={{ scale: 1.05 }}

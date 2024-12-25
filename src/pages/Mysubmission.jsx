@@ -24,6 +24,25 @@ const MySubmission = () => {
             year: 'numeric'
         });
     };
+    if (submissions.length === 0) {
+        return (
+            <div className="container mx-auto px-4 py-8 dark:bg-gray-900">
+                <Card className="bg-white dark:bg-gray-800 shadow-lg rounded-xl">
+                    <CardHeader className="border-b p-6 dark:border-gray-700">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <CardTitle className="text-2xl md:text-3xl font-bold text-primary dark:text-primary">My Submissions</CardTitle>
+                                <p className="text-gray-500 mt-1 dark:text-gray-300">Track your assignment progress</p>
+                            </div>
+                        </div>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                        <p className="text-gray-500 text-center">No submissions found.</p>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto px-4 py-8 dark:bg-gray-900">

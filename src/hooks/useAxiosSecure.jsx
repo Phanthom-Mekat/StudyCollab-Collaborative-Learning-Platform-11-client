@@ -5,7 +5,7 @@ import { AuthContext } from '@/provider/AuthProvider';
 
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://batcht-10-assignment-11-server.vercel.app',
     withCredentials: true
 });
 
@@ -17,7 +17,7 @@ const useAxiosSecure = () => {
         axiosInstance.interceptors.response.use(response => {
             return response;
         }, error => {
-            console.log('api response error status', error.status);
+            // console.log('api response error status', error.status);
             if (error.status === 401 || error.status === 403) {
                 logOut()
                     .then(() => {

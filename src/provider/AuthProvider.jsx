@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const user = { email: currentUser.email }
 
-        axios.post(`http://localhost:5000/jwt`, user, {
+        axios.post(`https://batcht-10-assignment-11-server.vercel.app/jwt`, user, {
           withCredentials: true
         })
           .then(res => {
@@ -77,7 +77,7 @@ const AuthProvider = ({ children }) => {
       }
       // when the user logs out, the currentUser becomes null, remove the token.
       else {
-        axios.post(`http://localhost:5000/logout`, {}, {
+        axios.post(`https://batcht-10-assignment-11-server.vercel.app/logout`, {}, {
           withCredentials: true,
         })
           .then(res => {

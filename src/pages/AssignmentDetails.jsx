@@ -54,7 +54,7 @@ const AssignmentDetails = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/submitAssignment', {
+            const response = await fetch('https://batcht-10-assignment-11-server.vercel.app/submitAssignment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,8 +75,8 @@ const AssignmentDetails = () => {
             navigate('/assignments');
 
         } catch (error) {
-            toast.error('Failed to submit assignment. Please try again.');
-            console.error('Submission error:', error);
+            toast.error('Failed to submit assignment. Please try again.',error);
+            // console.error('Submission error:', error);
         } finally {
             setIsSubmitting(false);
         }

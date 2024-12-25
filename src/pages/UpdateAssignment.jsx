@@ -41,7 +41,7 @@ const UpdateAssignment = () => {
         dueDate,
       };
 
-      const response = await fetch(`http://localhost:5000/create/${loadedAssignment._id}`, {
+      const response = await fetch(`https://batcht-10-assignment-11-server.vercel.app/create/${loadedAssignment._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

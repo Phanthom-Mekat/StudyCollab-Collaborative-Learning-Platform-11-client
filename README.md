@@ -3,6 +3,9 @@
 A platform for students to submit and view assignments, with features such as marking and grading, and a UI that is easy to use.
 
 [Live URL](https://studycolab.netlify.app/)
+[Live firebase](https://studycollab-64f2a.web.app/)
+[Live vercel ](https://batcht-10-assignment-11-server.vercel.app/)
+
 
 ## Key Features
 

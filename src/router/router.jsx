@@ -30,25 +30,25 @@ const router = createBrowserRouter([
             {
                 path:'assignments',
                 element: <Assignments/>,
-                loader: async () => fetch('http://localhost:5000/create').then(res => res.json())
+                loader: async () => fetch('https://batcht-10-assignment-11-server.vercel.app/create').then(res => res.json())
             },
             // assignment details
             { 
                 path:'assignments/:id',
                 element: <PrivateRouter><AssignmentDetails/></PrivateRouter>,
-                loader:  ({params}) => fetch(`http://localhost:5000/create/${params.id}`)
+                loader:  ({params}) => fetch(`https://batcht-10-assignment-11-server.vercel.app/create/${params.id}`)
             },
             // update assignment
             {
                 path:'update/:id',
                 element: <PrivateRouter><UpdateAssignment/></PrivateRouter>,
-                loader:  ({params}) => fetch(`http://localhost:5000/create/${params.id}`)
+                loader:  ({params}) => fetch(`https://batcht-10-assignment-11-server.vercel.app/create/${params.id}`)
                 
             },
             {
                 path: 'pendingAssignment',
                 element: <PrivateRouter><PendingAssignments /></PrivateRouter>,
-                // loader: ()=>fetch('http://localhost:5000/submitAssignment')
+                // loader: ()=>fetch('https://batcht-10-assignment-11-server.vercel.app/submitAssignment')
             },{
                 path: "mySubmission",
                 element: <PrivateRouter><Mysubmission /></PrivateRouter>,
