@@ -72,7 +72,7 @@ const Navbar = () => {
     );
 
     return (
-        <nav className={isHome  ? "bg-gray-100 dark:bg-gray-900 " : undefined}>
+        <nav className={isHome ? "bg-gray-100 sticky top-0 z-50 dark:bg-gray-900 " : "bg-gray-100 sticky top-0 z-50 dark:bg-gray-900 "}>
             <div className="navbar  md:w-11/12 mx-auto">
                 {/* Navbar Start */}
                 <div className="navbar-start">

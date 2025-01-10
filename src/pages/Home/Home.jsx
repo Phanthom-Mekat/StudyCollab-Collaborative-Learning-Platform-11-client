@@ -4,6 +4,7 @@ import FeatureSection from "../../components/Home/FeatureSection";
 import Faq from "@/components/Home/Faq";
 import Testimonials from "@/components/Home/Testimonials";
 import BlogsSection from "@/components/Home/BlogsSection";
+import NewsLetter from "@/components/Home/NewsLetter";
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <BlogsSection/>
             <Testimonials/>
             <Faq/>
+            <NewsLetter/>
         </div>
     );
 };
